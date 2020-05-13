@@ -1,10 +1,10 @@
 package com.atlanticyu.loganalysisback.service.impl;
 
+import com.atlanticyu.loganalysisback.model.entity.Admin;
 import com.atlanticyu.loganalysisback.model.entity.User;
 import com.atlanticyu.loganalysisback.repository.UserRepository;
-import com.atlanticyu.loganalysisback.service.AuthService;
+import com.atlanticyu.loganalysisback.service.AdminService;
 import com.atlanticyu.loganalysisback.util.JwtTokenUtil;
-import com.mysql.cj.log.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -15,11 +15,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthServiceImpl implements AuthService {
+public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -67,5 +66,14 @@ public class AuthServiceImpl implements AuthService {
             System.out.println("登录异常:" + e.getMessage());
         }
         return token;
+    }
+
+    @Override
+    public User getAdminByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        System.out.println("ServiceImp");
+        System.out.println(user.getUsername());
+        System.out.println(user.getPassword());
+        return user;
     }
 }
