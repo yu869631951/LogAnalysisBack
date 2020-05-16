@@ -1,10 +1,11 @@
 package com.atlanticyu.loganalysisback.scala.sparkstreaming
 import java.util.Properties
 
-import org.apache.spark.sql.types.{IntegerType, StringType, StructField, StructType}
+import org.apache.spark.sql.types.{DateType, IntegerType, StringType, StructField, StructType}
 import org.apache.spark.{SparkConf, SparkContext}
 import org.springframework.stereotype.Component
 import org.apache.spark.sql.{DataFrame, SaveMode, SparkSession}
+import org.joda.time.DateTime
 
 
 @Component
@@ -111,7 +112,7 @@ class OperateFileDirectory {
       StructField("id",IntegerType),
       StructField("xh",StringType),
       StructField("class",StringType),
-      StructField("time",IntegerType),
+      StructField("time",StringType),
       StructField("ip",StringType),
       StructField("host",StringType),
       StructField("app_name",StringType),
@@ -139,7 +140,7 @@ class OperateFileDirectory {
       .createOrReplaceTempView("net_time")
     //spark.read.table("tmp02").show()
     //操作表 ,按照年龄进行降序排列
-    val resultDFIpVisitCount: DataFrame = spark.sql("select * from net_time order by visit_count desc")
+    val resultDFIpVisitCount: DataFrame = spark.sql("select * from net_time order by time_value")
     resultDFIpVisitCount.write.mode(SaveMode.Overwrite).jdbc(url,"net_time",prop)
   }
 }
