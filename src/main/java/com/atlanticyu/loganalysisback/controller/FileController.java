@@ -1,5 +1,6 @@
 package com.atlanticyu.loganalysisback.controller;
 
+import com.atlanticyu.loganalysisback.commo.CommonResult;
 import com.atlanticyu.loganalysisback.scala.sparkstreaming.OperateFileDirectory;
 import com.atlanticyu.loganalysisback.util.HDFSCommonUtil;
 import io.swagger.annotations.ApiOperation;
@@ -16,17 +17,20 @@ import java.io.*;
 public class FileController {
     @RequestMapping(value = "/file/upload", method = RequestMethod.POST)
     @ApiOperation("上传待分析文件")
-    public void getFileToHDFS(@RequestParam("file") MultipartFile file){
+    public CommonResult getFileToHDFS(@RequestParam("file") MultipartFile file){
+        System.out.println("上传file");
         try {
             if (file != null) {
                 File hh = HDFSCommonUtil.MultipartFileToFile(file);
                 HDFSCommonUtil.copyfileToHdfs(new Configuration(),"hdfs://192.168.248.128:9000/",hh);
+                return CommonResult.success(null);
             }
         }
         catch(Exception io)
         {
             io.printStackTrace();
         }
+        return CommonResult.failed("上传发生错误");
     }
 
     @RequestMapping(value = "file/analysis", method = RequestMethod.GET)

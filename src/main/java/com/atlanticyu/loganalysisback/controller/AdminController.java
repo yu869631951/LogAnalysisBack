@@ -59,6 +59,7 @@ public class AdminController {
         data.put("roles", new String[]{"TEST"});
         //模拟菜单，title会被前端路由命名覆盖
         data.put("menus", new String[]{"[UmsMenu [Hash = 380815906, id=1, parentId=0, createTime=Sun Feb 02 14:50:36 CST 2020, title=本地日志操作, level=0, sort=0, name=localLogOperation, icon=local, hidden=0, serialVersionUID=1], UmsMenu [Hash = 680091108, id=2, parentId=1, createTime=Sun Feb 02 14:51:50 CST 2020, title=本地一, level=1, sort=0, name=one, icon=one, hidden=0, serialVersionUID=1], UmsMenu [Hash = 1709117565, id=3, parentId=1, createTime=Sun Feb 02 14:52:44 CST 2020, title=本地二, level=1, sort=0, name=two, icon=two, hidden=0, serialVersionUID=1,UmsMenu [Hash = 380815906, id=4, parentId=0, createTime=Sun Feb 02 14:50:36 CST 2020, title=本地日志操作, level=0, sort=0, name=localLogOperation, icon=local, hidden=0, serialVersionUID=1],UmsMenu [Hash = 380815906, id=5, parentId=0, createTime=Sun Feb 02 14:50:36 CST 2020, title=本地日志操作, level=0, sort=0, name=localLogOperation, icon=local, hidden=0, serialVersionUID=1]]"});
+        //data.put("menus", new String[]{"[UmsMenu [Hash = 380815906, id=1, parentId=0, createTime=Sun Feb 02 14:50:36 CST 2020, title=本地日志操作, level=0, sort=0, name=localLogOperation, icon=local, hidden=0, serialVersionUID=1], UmsMenu [Hash = 680091108, id=2, parentId=1, createTime=Sun Feb 02 14:51:50 CST 2020, title=本地一, level=1, sort=0, name=one, icon=one, hidden=0, serialVersionUID=1], UmsMenu [Hash = 1709117565, id=3, parentId=1, createTime=Sun Feb 02 14:52:44 CST 2020, title=本地二, level=1, sort=0, name=two, icon=two, hidden=0, serialVersionUID=1,UmsMenu [Hash = 380815906, id=4, parentId=0, createTime=Sun Feb 02 14:50:36 CST 2020, title=本地日志操作, level=0, sort=0, name=localLogOperation, icon=local, hidden=0, serialVersionUID=1],UmsMenu [Hash = 380815906, id=5, parentId=0, createTime=Sun Feb 02 14:50:36 CST 2020, title=本地日志操作, level=0, sort=0, name=localLogOperation, icon=local, hidden=0, serialVersionUID=1]]"});
 //        data.put("icon", umsAdmin.getIcon());
         return CommonResult.success(data);
     }
@@ -85,5 +86,11 @@ public class AdminController {
     //    public User register(@RequestBody User addedUser ) throws AuthenticationException {
 //        return adminService.register(addedUser);
 //    }
+    @ApiOperation(value = "登出功能")
+    @RequestMapping(value = "/admin/logout", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult logout() {
+        return CommonResult.success(null);
+    }
 
 }

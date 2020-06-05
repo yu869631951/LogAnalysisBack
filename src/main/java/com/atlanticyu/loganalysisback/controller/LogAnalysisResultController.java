@@ -36,7 +36,6 @@ public class LogAnalysisResultController {
             return CommonResult.unauthorized(null);
         }
         List<UrlAnalysisEntity> urlAnalysisEntityList = logAnaResultService.getUrlVisitCount();
-        System.out.println("我来了1");
         System.out.println(urlAnalysisEntityList);
         Map<String, Object> data = new HashMap<>();
         data.put("UrlAnaResult",urlAnalysisEntityList);
@@ -52,7 +51,6 @@ public class LogAnalysisResultController {
             return CommonResult.unauthorized(null);
         }
         List<IpAnalysisEntity> ipAnalysisEntities = logAnaResultService.getIpVisitCount();
-        System.out.println("我来了2");
         System.out.println(ipAnalysisEntities);
         Map<String, Object> data = new HashMap<>();
         data.put("IpAnaResult",ipAnalysisEntities);
@@ -77,7 +75,6 @@ public class LogAnalysisResultController {
                 netTimeAnalysisEntities.get(i).setTime_value(df.format(timestamp));
             }
         }
-        System.out.println("我来了3");
         System.out.println(netTimeAnalysisEntities);
         Map<String, Object> data = new HashMap<>();
         data.put("NetTimeAnaResult",netTimeAnalysisEntities);
